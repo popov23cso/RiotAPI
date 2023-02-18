@@ -1,0 +1,24 @@
+{% extends "StatViewer/layout.html" %}
+
+
+{% block title %}
+    Homepage
+{% endblock %}
+
+{% block body %}
+<h1 style="text-align: center;">StatViewer.gg</h1>
+<div class="container" style="margin-bottom: 25px;">
+    <form method="post" action="#" autocomplete="off">
+      {% csrf_token %}
+      <div style="margin-top: 100px;margin-bottom: 20px;">
+        <input class="form-control form-control-lg" id="summonerName" type="text" name="username" placeholder="Username" autocomplete="on">
+      </div>
+      <button type="button" class="btn btn-primary" id="searchbtn">ShowQuickStats</button>        
+      <button type="button" id="resetbtn" class="btn btn-danger">Reset</button>
+      <button type="submit" class="btn btn-primary" id="searchbtn">ViewProfile</button>    
+    </form>    
+</div>
+
+
+{% endblock %}
+
