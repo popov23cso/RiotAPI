@@ -1,5 +1,6 @@
 {% extends "StatViewer/layout.html" %}
 
+{% load static %}
 
 {% block title %}
     Homepage
@@ -18,7 +19,13 @@
       <button type="submit" class="btn btn-primary" id="searchbtn">ViewProfile</button>    
     </form>    
 </div>
+<div class="container" id="summonerInfo">
 
+</div>
 
+{% endblock %}
+
+{% block scripts %}
+  <script src="{% static 'StatViewer/quickstats.js' %}"></script>
 {% endblock %}
 
