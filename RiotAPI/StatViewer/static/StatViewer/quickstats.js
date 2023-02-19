@@ -48,6 +48,8 @@ function load_player(player) {
 
 function show_player(player, stats) {
     const profile = document.createElement('div');
+    profile.setAttribute('id', 'profile');
+
     if (stats.length === 0) {
         profile.innerHTML = `${player['name']} - Level: ${player['summonerLevel']} - UNRANKED`;
     }
@@ -61,7 +63,7 @@ function show_player(player, stats) {
         queue.style.marginBottom = '5px';
         profile.appendChild(queue, profile);
     })}
-    profile.setAttribute('id', 'profile');
+    
     const summonerInfo = document.querySelector('#summonerInfo');
     summonerInfo.appendChild(profile, summonerInfo);
 }
