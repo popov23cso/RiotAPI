@@ -7,3 +7,9 @@
     border-color: rgb(47, 230, 47);
     padding: 10px;
 }
+
+
+
+#summonerName, #selectField {
+    display: inline-block;
+}

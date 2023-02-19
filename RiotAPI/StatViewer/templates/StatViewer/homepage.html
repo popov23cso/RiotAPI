@@ -9,10 +9,15 @@
 {% block body %}
 <h1 style="text-align: center;">StatViewer.gg</h1>
 <div class="container" style="margin-bottom: 25px;">
-    <form method="post" action="#" autocomplete="off">
+    <form method="post" action="#" autocomplete="on">
       {% csrf_token %}
       <div style="margin-top: 100px;margin-bottom: 20px;">
-        <input class="form-control form-control-lg" id="summonerName" type="text" name="username" placeholder="Username" autocomplete="on">
+        <input class="form-control form-control-lg" id="summonerName" style="width: 300px;" type="text" name="username" placeholder="Username" autocomplete="on">
+        <select class="form-select form-select-lg mb-3" style="width:150px;" id="selectField">
+          <option selected value="EUNE">EUNE</option>
+          <option value="EUW">EUW</option>
+          <option value="NA">NA</option>
+        </select>   
       </div>
       <button type="button" class="btn btn-primary" id="searchbtn">ShowQuickStats</button>        
       <button type="button" id="resetbtn" class="btn btn-danger">Reset</button>
