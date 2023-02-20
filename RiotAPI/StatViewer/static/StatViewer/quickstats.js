@@ -1,4 +1,4 @@
-var key = "RGAPI-7436ed83-9980-4095-a7ee-db5dad111646";
+var key = "API_KEY";
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function find_player() {
     const username = document.querySelector('#summonerName').value;
-    fetch(`https://eun1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${username}?api_key=${key}`, {
+    const region = document.querySelector('#selectField').value;
+    fetch(`https://${region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${username}?api_key=${key}`, {
         method: 'GET',
         headers: {
             "User-Agent": window.navigator.userAgent,
@@ -20,7 +21,7 @@ function find_player() {
     })
     .then(data => data.json())
     .then(profile => {          
-        load_player(profile);
+        load_player(profile, region);
     })
     .catch(function() {
         alert('InvalidUsername');
@@ -29,8 +30,8 @@ function find_player() {
 }
 
 
-function load_player(player) {
-    fetch(`https://eun1.api.riotgames.com/lol/league/v4/entries/by-summoner/${player['id']}?api_key=${key}`, {
+function load_player(player, region) {
+    fetch(`https://${region}.api.riotgames.com/lol/league/v4/entries/by-summoner/${player['id']}?api_key=${key}`, {
         method: 'GET',
         headers: {
             "User-Agent": window.navigator.userAgent,
