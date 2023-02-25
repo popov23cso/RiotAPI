@@ -1,4 +1,4 @@
-var key = "RGAPI-93362dc5-9a5f-45bd-83a3-e78886d3dc04";
+var key = "API_KEY";
 
 const username = document.querySelector('#userdata').dataset.username;
 const region = document.querySelector('#userdata').dataset.region;
