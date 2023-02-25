@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 function find_player() {
+    
     const username = document.querySelector('#summonerName').value;
     const region = document.querySelector('#selectField').value;
     fetch(`https://${region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${username}?api_key=${key}`, {
