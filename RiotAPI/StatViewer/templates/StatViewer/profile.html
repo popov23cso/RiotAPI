@@ -1,0 +1,30 @@
+{% extends "StatViewer/layout.html" %}
+
+{% load static %}
+
+{% block title %}
+    Profile view
+{% endblock %}
+
+{% block body %}
+<h1 style="text-align:center;">{{username}}</h1>
+<button type="button" class="btn btn-primary" id="backbtn">Go back</button>        
+<input type="hidden" id="userdata" data-username="{{username}}" data-region="{{region}}">
+<div id="summonerInfo" class="container">
+    Level: <text id="level"></text><br>
+    Ranks: <text id="ranks"></text>
+</div>
+
+<h2 style="text-align:center">
+    Last 5 matches:
+</h2>
+
+<div id="matchHistory" class="container">
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+  <script src="{% static 'StatViewer/profile.js' %}"></script>
+{% endblock %}
