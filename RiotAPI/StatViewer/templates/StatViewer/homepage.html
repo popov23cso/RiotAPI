@@ -12,7 +12,7 @@
     <form method="post" action="{% url 'profile' %}" autocomplete="on" id="searchForm">
       {% csrf_token %}
       <div style="margin-top: 100px;margin-bottom: 20px;">
-        <input class="form-control form-control-lg" id="summonerName" style="width: 300px;" type="text" name="username" placeholder="Username" autocomplete="on" required>
+        <input class="form-control form-control-lg" id="summonerName" style="width: 300px;" type="text" name="username" placeholder="Username" required>
         <select class="form-select form-select-lg mb-3" style="width:150px;" id="selectField" name="region">
           <option selected value="eun1">EUNE</option>
           <option value="euw1">EUW</option>
