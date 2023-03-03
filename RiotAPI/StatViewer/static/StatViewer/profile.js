@@ -4,9 +4,6 @@ const username = document.querySelector('#userdata').dataset.username;
 const region = document.querySelector('#userdata').dataset.region;
 
 document.addEventListener('DOMContentLoaded', () => {
-    document.querySelector('#backbtn').addEventListener('click', () => {
-        window.location = '/';
-    })
     find_player();
 })
 
