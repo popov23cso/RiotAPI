@@ -7,8 +7,28 @@
 {% endblock %}
 
 {% block body %}
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">Home</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <form class="d-flex" action="{% url 'profile' %}" method="post" autocomplete="on">
+          {% csrf_token %}
+          <input class="form-control me-2" type="search" placeholder="Username" aria-label="Search" name="username">
+          <select class="form-select" name="region" style="margin-right: 5px;">
+            <option selected value="eun1">EUNE</option>
+            <option value="euw1">EUW</option>
+            <option value="na1">NA</option>
+          </select>
+          <button type="submit" class="btn btn-primary">ViewProfile</button>
+        </form>
+      </div>
+    </div>
+</nav>      
+
 <h1 style="text-align:center;">{{username}}</h1>
-<button type="button" class="btn btn-primary" id="backbtn">Go back</button>        
 <input type="hidden" id="userdata" data-username="{{username}}" data-region="{{region}}">
 <div id="summonerInfo" class="container">
     Level: <text id="level"></text><br>
