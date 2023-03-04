@@ -112,7 +112,7 @@ function show_match(match) {
                         ${lane} - ${kills}/${deaths}/${assists} <br>
                         ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
     Match.appendChild(stats, Match);
-    Match.setAttribute('id', 'profile');
+    Match.setAttribute('id', 'statBubble');
     const matchHistory = document.querySelector('#matchHistory');
     matchHistory.appendChild(Match, matchHistory);
 

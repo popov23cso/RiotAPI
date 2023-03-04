@@ -50,7 +50,7 @@ function load_player(player, region) {
 
 function show_player(player, stats) {
     const profile = document.createElement('div');
-    profile.setAttribute('id', 'profile');
+    profile.setAttribute('id', 'statBubble');
 
     if (stats.length === 0) {
         profile.innerHTML = `${player['name']} - Level: ${player['summonerLevel']} - UNRANKED`;
