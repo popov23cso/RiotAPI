@@ -101,18 +101,46 @@ function get_matches_stats(matches) {
 
 function show_match(match) {
     const Match = document.createElement('div');
-    const LoadedMatches = document.querySelector('#matchHistory');
-    const duration = match['info']['gameCreation'];
-    let date = new Date(duration);
+    const GameCreation = match['info']['gameCreation'];
+    let StartDate = new Date(GameCreation);
     let player = match['info']['participants'].find(player => {
         return player['summonerName'] == username; 
     })
     const{championName, kills, deaths, assists, lane, win} = player;
     Match.innerHTML = `${championName} - ${modes[match['info']['queueId']]} ${ match['info']['gameMode']} ${win? '✔️':'❌'}<br>
                         ${lane} - ${kills}/${deaths}/${assists} <br>
-                        ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+                        ${StartDate.getDate()}/${StartDate.getMonth() + 1}/${StartDate.getFullYear()}`;
+    Match.dataset.date = StartDate;
     Match.setAttribute('id', 'statBubble');
-    const matchHistory = document.querySelector('#matchHistory');
-    matchHistory.appendChild(Match, matchHistory);
-
+    const MatchHistory = document.querySelector('#matchHistory');
+    const LoadedMatches = MatchHistory.getElementsByTagName('div');
+    if (LoadedMatches.length > 0) {
+        if (LoadedMatches.length == 1) {
+            FirstMatch = new Date(LoadedMatches[0].dataset.date);
+            if(FirstMatch < StartDate) {
+                LoadedMatches[0].before(Match);
+                return;
+            }
+            else {
+                LoadedMatches[0].after(Match);
+                return;
+            }
+        }
+        let placement = 0;
+        for (let i = 0; i < LoadedMatches.length; i++) {
+            LoadedDate = new Date(LoadedMatches[i].dataset.date);
+            if (LoadedDate > StartDate) {
+                continue;
+            }
+            else {
+                LoadedMatches[i].before(Match);
+                return;
+            }
+        }
+        MatchHistory.appendChild(Match, MatchHistory);
+        return;
+    } 
+    else {
+        MatchHistory.appendChild(Match, MatchHistory);
+    }
 }
