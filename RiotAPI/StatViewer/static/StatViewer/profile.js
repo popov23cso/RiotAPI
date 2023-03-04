@@ -101,17 +101,16 @@ function get_matches_stats(matches) {
 
 function show_match(match) {
     const Match = document.createElement('div');
-    const stats = document.createElement('div');
+    const LoadedMatches = document.querySelector('#matchHistory');
     const duration = match['info']['gameCreation'];
     let date = new Date(duration);
     let player = match['info']['participants'].find(player => {
         return player['summonerName'] == username; 
     })
     const{championName, kills, deaths, assists, lane, win} = player;
-    stats.innerHTML = `${championName} - ${modes[match['info']['queueId']]} ${ match['info']['gameMode']} ${win? '✔️':'❌'}<br>
+    Match.innerHTML = `${championName} - ${modes[match['info']['queueId']]} ${ match['info']['gameMode']} ${win? '✔️':'❌'}<br>
                         ${lane} - ${kills}/${deaths}/${assists} <br>
                         ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-    Match.appendChild(stats, Match);
     Match.setAttribute('id', 'statBubble');
     const matchHistory = document.querySelector('#matchHistory');
     matchHistory.appendChild(Match, matchHistory);
