@@ -126,7 +126,6 @@ function show_match(match) {
                 return;
             }
         }
-        let placement = 0;
         for (let i = 0; i < LoadedMatches.length; i++) {
             LoadedDate = new Date(LoadedMatches[i].dataset.date);
             if (LoadedDate > StartDate) {
