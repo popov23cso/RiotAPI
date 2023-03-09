@@ -100,46 +100,46 @@ function get_matches_stats(matches) {
 }
 
 function show_match(match) {
-    const Match = document.createElement('div');
-    const GameCreation = match['info']['gameCreation'];
-    let StartDate = new Date(GameCreation);
+    const matchContainer = document.createElement('div');
+    const gameCreation = match['info']['gameCreation'];
+    let startDate = new Date(gameCreation);
     let player = match['info']['participants'].find(player => {
         return player['summonerName'] == username; 
     })
     const{championName, kills, deaths, assists, lane, win} = player;
-    Match.innerHTML = `${championName} - ${modes[match['info']['queueId']]} ${ match['info']['gameMode']} ${win? '✔️':'❌'}<br>
+    matchContainer.innerHTML = `${championName} - ${modes[match['info']['queueId']]} ${ match['info']['gameMode']} ${win? '✔️':'❌'}<br>
                         ${lane} - ${kills}/${deaths}/${assists} <br>
-                        ${StartDate.getDate()}/${StartDate.getMonth() + 1}/${StartDate.getFullYear()}`;
-    Match.dataset.date = StartDate;
-    Match.setAttribute('id', 'statBubble');
-    const MatchHistory = document.querySelector('#matchHistory');
-    const LoadedMatches = MatchHistory.getElementsByTagName('div');
-    if (LoadedMatches.length > 0) {
-        if (LoadedMatches.length == 1) {
-            FirstMatch = new Date(LoadedMatches[0].dataset.date);
-            if(FirstMatch < StartDate) {
-                LoadedMatches[0].before(Match);
+                        ${startDate.getDate()}/${startDate.getMonth() + 1}/${startDate.getFullYear()}`;
+    matchContainer.dataset.date = startDate;
+    matchContainer.setAttribute('id', 'statBubble');
+    const matchHistory = document.querySelector('#matchHistory');
+    const loadedMatches = matchHistory.getElementsByTagName('div');
+    if (loadedMatches.length > 0) {
+        if (loadedMatches.length == 1) {
+            const firstMatch = new Date(loadedMatches[0].dataset.date);
+            if(firstMatch < startDate) {
+                loadedMatches[0].before(matchContainer);
                 return;
             }
             else {
-                LoadedMatches[0].after(Match);
+                loadedMatches[0].after(matchContainer);
                 return;
             }
         }
-        for (let i = 0; i < LoadedMatches.length; i++) {
-            LoadedDate = new Date(LoadedMatches[i].dataset.date);
-            if (LoadedDate > StartDate) {
+        for (let i = 0; i < loadedMatches.length; i++) {
+            const loadedDate = new Date(loadedMatches[i].dataset.date);
+            if (loadedDate > startDate) {
                 continue;
             }
             else {
-                LoadedMatches[i].before(Match);
+                loadedMatches[i].before(matchContainer);
                 return;
             }
         }
-        MatchHistory.appendChild(Match, MatchHistory);
+        matchHistory.appendChild(matchContainer, matchHistory);
         return;
     } 
     else {
-        MatchHistory.appendChild(Match, MatchHistory);
+        matchHistory.appendChild(matchContainer, matchHistory);
     }
 }
