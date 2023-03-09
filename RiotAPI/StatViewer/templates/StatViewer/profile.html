@@ -16,7 +16,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <form class="d-flex" action="{% url 'profile' %}" method="post" autocomplete="on">
           {% csrf_token %}
-          <input class="form-control me-2" type="search" placeholder="Username" aria-label="Search" name="username">
+          <input class="form-control me-2" type="search" placeholder="Username" aria-label="Search" name="username" required>
           <select class="form-select" name="region" style="margin-right: 5px;">
             <option selected value="eun1">EUNE</option>
             <option value="euw1">EUW</option>
