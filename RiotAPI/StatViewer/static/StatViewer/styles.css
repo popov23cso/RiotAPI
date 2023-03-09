@@ -8,6 +8,14 @@
     padding: 10px;
 }
 
+#defeatBubble {
+    margin-bottom: 5px;
+    border: 1px solid;
+    border-radius: 25px;
+    border-color: rgb(235, 11, 11);
+    padding: 10px;
+}
+
 
 
 #summonerName, #selectField {

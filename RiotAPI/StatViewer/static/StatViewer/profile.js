@@ -106,14 +106,17 @@ function show_match(match) {
     let player = match['info']['participants'].find(player => {
         return player['summonerName'] == username; 
     })
+
     const{championName, kills, deaths, assists, lane, win} = player;
-    matchContainer.innerHTML = `${championName} - ${modes[match['info']['queueId']]} ${ match['info']['gameMode']} ${win? '✔️':'❌'}<br>
+    matchContainer.innerHTML = `${championName} - ${modes[match['info']['queueId']]} ${ match['info']['gameMode']} ${win ? '✔️' : '❌'}<br>
                         ${lane} - ${kills}/${deaths}/${assists} <br>
                         ${startDate.getDate()}/${startDate.getMonth() + 1}/${startDate.getFullYear()}`;
     matchContainer.dataset.date = startDate;
-    matchContainer.setAttribute('id', 'statBubble');
+
+    matchContainer.setAttribute('id', win ? 'statBubble' : 'defeatBubble');
     const matchHistory = document.querySelector('#matchHistory');
     const loadedMatches = matchHistory.getElementsByTagName('div');
+
     if (loadedMatches.length > 0) {
         if (loadedMatches.length == 1) {
             const firstMatch = new Date(loadedMatches[0].dataset.date);
