@@ -6,6 +6,7 @@
     Profile view
 {% endblock %}
 
+
 {% block body %}
 <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
@@ -14,15 +15,15 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <form class="d-flex" action="{% url 'profile' %}" method="post" autocomplete="on">
+        <form class="d-flex" action="#" method="post" autocomplete="on">
           {% csrf_token %}
-          <input class="form-control me-2" type="search" placeholder="Username" aria-label="Search" name="username" required>
-          <select class="form-select" name="region" style="margin-right: 5px;">
+          <input class="form-control me-2" type="search" id="summonerName" placeholder="Username" aria-label="Search" name="username" required>
+          <select class="form-select" name="region" style="margin-right: 5px;" id="selectField">
             <option selected value="eun1">EUNE</option>
             <option value="euw1">EUW</option>
             <option value="na1">NA</option>
           </select>
-          <button type="submit" class="btn btn-primary">ViewProfile</button>
+          <button type="button" class="btn btn-primary" id="viewProfile">ViewProfile</button>
         </form>
       </div>
     </div>
