@@ -4,6 +4,7 @@ const username = document.querySelector('#userdata').dataset.username;
 const region = document.querySelector('#userdata').dataset.region;
 
 document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('#viewProfile').addEventListener('click', viewProfile);
     find_player();
 })
 
@@ -108,6 +109,7 @@ function show_match(match, match_id) {
     })
 
     const{championName, kills, deaths, assists, lane, win} = player;
+    
     matchContainer.innerHTML = `${championName} - ${modes[match['info']['queueId']]} ${ match['info']['gameMode']} ${win ? '✔️' : '❌'}<br>
                         ${lane} - ${kills}/${deaths}/${assists} <br>
                         ${startDate.getDate()}/${startDate.getMonth() + 1}/${startDate.getFullYear()}`;
@@ -151,4 +153,11 @@ function show_match(match, match_id) {
 
 function view_match(match_id) {
     window.location = `/match/${region == 'na1' ? 'americas' : 'europe'}/${match_id}`;
+}
+
+
+function viewProfile() {
+    const username = document.querySelector('#summonerName').value;
+    const region = document.querySelector('#selectField').value;
+    window.location = `/profile/${region}/${username}`;
 }

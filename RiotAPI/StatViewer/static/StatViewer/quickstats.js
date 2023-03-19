@@ -4,6 +4,8 @@ var key = "API_KEY";
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#searchbtn').addEventListener('click', find_player);
     document.querySelector('#resetbtn').addEventListener('click', reset_results);
+    document.querySelector('#viewProfile').addEventListener('click', viewProfile);
+
 })
 
 
@@ -75,8 +77,15 @@ function calculate_winrate(wins, losses) {
     return Math.ceil(parseFloat((parseInt(wins)/(parseInt(wins) + parseInt(losses))) * 100))
 }
 
+
 function reset_results() {
     document.querySelector('#summonerInfo').innerHTML = '';
 
 }
 
+
+function viewProfile() {
+    const username = document.querySelector('#summonerName').value;
+    const region = document.querySelector('#selectField').value;
+    window.location = `/profile/${region}/${username}`;
+}
