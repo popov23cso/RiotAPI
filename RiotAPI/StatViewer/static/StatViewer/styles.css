@@ -21,3 +21,11 @@
 #summonerName, #selectField {
     display: inline-block;
 }
+
+
+#players {
+    display: grid;
+    grid-template-columns: auto auto;
+    place-items: start;
+
+}
