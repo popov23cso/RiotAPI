@@ -1,0 +1,18 @@
+{% extends "StatViewer/layout.html" %}
+
+{% load static %}
+
+{% block title %}
+    Match viewer
+{% endblock %}
+
+{% block body %}
+<input type="hidden" id="match_id" data-id="{{match_id}}" data-region="{{region}}">
+<p class="h2 text-center">Viewing match {{match_id}} on the {{region}} region</p>
+
+<div class="container" id="players">
+
+
+    
+</div>
+{% endblock %}
