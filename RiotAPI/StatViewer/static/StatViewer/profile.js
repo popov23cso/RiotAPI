@@ -150,5 +150,5 @@ function show_match(match, match_id) {
 
 
 function view_match(match_id) {
-    window.location = `/match/${match_id}`;
+    window.location = `/match/${region == 'na1' ? 'americas' : 'europe'}/${match_id}`;
 }
