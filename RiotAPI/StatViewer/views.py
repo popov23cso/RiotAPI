@@ -20,8 +20,9 @@ def profile(request):
     })
 
 
-def match(request, match_id):
+def match(request,region, match_id):
     id = match_id
     return render (request, "StatViewer/match.html", {
+        'region': region,
         'match_id': id
     })
