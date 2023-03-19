@@ -83,8 +83,8 @@ function load_match_ids(player) {
 }
 
 function get_matches_stats(matches) {
-    Array.from(matches).forEach(match => {
-    fetch(`https://${region == 'na1' ? 'americas' : 'europe'}.api.riotgames.com/lol/match/v5/matches/${match}?api_key=${key}`, {
+    Array.from(matches).forEach(match_id => {
+    fetch(`https://${region == 'na1' ? 'americas' : 'europe'}.api.riotgames.com/lol/match/v5/matches/${match_id}?api_key=${key}`, {
         method: 'GET',
         headers: {
             "User-Agent": window.navigator.userAgent,
@@ -95,11 +95,11 @@ function get_matches_stats(matches) {
     })
     .then(data => data.json())
     .then(matchdata => {
-        show_match(matchdata)
+        show_match(matchdata, match_id)
     })})
 }
 
-function show_match(match) {
+function show_match(match, match_id) {
     const matchContainer = document.createElement('div');
     const gameCreation = match['info']['gameCreation'];
     let startDate = new Date(gameCreation);
@@ -114,6 +114,7 @@ function show_match(match) {
     matchContainer.dataset.date = startDate;
 
     matchContainer.setAttribute('id', win ? 'statBubble' : 'defeatBubble');
+    matchContainer.addEventListener('click', ()=>{view_match(match_id);});
     const matchHistory = document.querySelector('#matchHistory');
     const loadedMatches = matchHistory.getElementsByTagName('div');
 
@@ -145,4 +146,9 @@ function show_match(match) {
     else {
         matchHistory.appendChild(matchContainer, matchHistory);
     }
+}
+
+
+function view_match(match_id) {
+    window.location = `/match/${match_id}`;
 }
