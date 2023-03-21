@@ -1,9 +1,18 @@
 var key = "API_KEY";
 
+
+var modes = {
+    400: "Draft Pick",
+    420: "Solo/Duo",
+    440: "Ranked Flex",
+    1900: ""
+    
+}
+
 document.addEventListener('DOMContentLoaded', ()=>{
-const id = document.querySelector('match_id').dataset.match_id;
-const region = document.querySelector('region').dataset.region;
-load_match(id, region);
+    const id = document.querySelector('#matchdata').dataset.id;
+    const region = document.querySelector('#matchdata').dataset.region;
+    load_match(id, region);
 
 
 })
@@ -25,5 +34,22 @@ function load_match(match_id, match_region) {
 }
 
 function draw_match(matchdata) {
-    //TODO draw out the match stats
+    const matchContainer = document.querySelector('#matchContainer');
+    //TODO add victory/defeat on top of each team
+    const matchHeadings = document.querySelector('#matchHeadings');
+    const mode = modes[matchdata['info']['queueId']] == undefined ? '' : modes[matchdata['info']['queueId']];
+    matchHeadings.innerHTML = `Game type: ${mode} ${matchdata['info']['gameMode']}`;
+    let i = 0;
+    Array.from(matchdata['info']['participants']).forEach(player => {
+        const team = document.querySelector(`#team${i < 5 ? 1 : 2}`);
+        const playerStats = document.createElement('h5');
+        playerStats.innerText = player['summonerName'];
+        team.append(playerStats);
+        i ++;
+        //TODO - add detailed data about each player`s stats
+
+    })
+
+
+
 }
