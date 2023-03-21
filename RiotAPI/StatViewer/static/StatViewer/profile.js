@@ -109,8 +109,8 @@ function show_match(match, match_id) {
     })
 
     const{championName, kills, deaths, assists, lane, win} = player;
-    
-    matchContainer.innerHTML = `${championName} - ${modes[match['info']['queueId']]} ${ match['info']['gameMode']} ${win ? '✔️' : '❌'}<br>
+    const mode = modes[match['info']['queueId']] == undefined ? '' : modes[match['info']['queueId']];
+    matchContainer.innerHTML = `${championName} - ${mode} ${ match['info']['gameMode']} ${win ? '✔️' : '❌'}<br>
                         ${lane} - ${kills}/${deaths}/${assists} <br>
                         ${startDate.getDate()}/${startDate.getMonth() + 1}/${startDate.getFullYear()}`;
     matchContainer.dataset.date = startDate;
