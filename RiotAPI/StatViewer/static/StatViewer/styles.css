@@ -23,7 +23,7 @@
 }
 
 
-#players {
+#matchContainer {
     display: grid;
     grid-template-columns: auto auto;
     place-items: start;

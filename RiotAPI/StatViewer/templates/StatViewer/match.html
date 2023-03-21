@@ -7,12 +7,26 @@
 {% endblock %}
 
 {% block body %}
-<input type="hidden" id="match_id" data-id="{{match_id}}" data-region="{{region}}">
-<p class="h2 text-center">Viewing match {{match_id}} on the {{region}} region</p>
 
-<div class="container" id="players">
+    <input type="hidden" id="matchdata" data-id="{{match_id}}" data-region="{{region}}">
+    <p class="h2 text-center">Viewing match {{match_id}} on the {{region}} region</p>
+    <p class="h3 text-center" id="matchHeadings"></p>
 
 
-    
-</div>
+
+    <div class="container" id="matchContainer">
+        <div id="team1">
+
+        </div>
+        <div id="team2">
+
+        </div>
+
+    </div>
+
+{% endblock %}
+
+
+{% block scripts %}
+    <script src="{% static 'StatViewer/match.js' %}"></script>
 {% endblock %}
