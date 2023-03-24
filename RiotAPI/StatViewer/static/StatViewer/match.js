@@ -34,21 +34,38 @@ function load_match(match_id, match_region) {
 }
 
 function draw_match(matchdata) {
-    const matchContainer = document.querySelector('#matchContainer');
-    //TODO add victory/defeat on top of each team
+    
     const matchHeadings = document.querySelector('#matchHeadings');
     const mode = modes[matchdata['info']['queueId']] == undefined ? '' : modes[matchdata['info']['queueId']];
     matchHeadings.innerHTML = `Game type: ${mode} ${matchdata['info']['gameMode']}`;
     let i = 0;
+    const max_dmg = get_max_damage(matchdata['info']['participants']);
     Array.from(matchdata['info']['participants']).forEach(player => {
         const team = document.querySelector(`#team${i < 5 ? 1 : 2}`);
         const playerStats = document.createElement('h5');
-        playerStats.innerText = player['summonerName'];
+        const dmgDone = document.createElement('div');
+        dmgDone.innerHTML = `<div class="progress">
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                                </div>
+                            </div>`;
+        const {summonerName, championName, champLevel, kills, deaths, assists, totalMinionsKilled, neutralMinionsKilled} = player;
+        playerStats.innerHTML = `${summonerName} - ${championName}(lvl${champLevel})<br>
+                                 KDA: ${kills}/${deaths}/${assists} CS: ${totalMinionsKilled + neutralMinionsKilled}<br>`;
+        playerStats.append(dmgDone);
+        playerStats.setAttribute('id', i < 5 ? 'statBubble' : 'defeatBubble');
         team.append(playerStats);
         i ++;
-        //TODO - add detailed data about each player`s stats
 
     })
+
+
+
+}
+
+
+function get_max_damage(players) {
+    let dmgDone = 0;
+    //TODO get max damage done by a player
 
 
 
