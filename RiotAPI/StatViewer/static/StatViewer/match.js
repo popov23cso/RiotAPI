@@ -55,6 +55,8 @@ function draw_match(matchdata) {
                                  KDA: ${kills}/${deaths}/${assists} CS: ${totalMinionsKilled + neutralMinionsKilled}<br>`;
         playerStats.append(dmgDone);
         playerStats.setAttribute('id', i < 5 ? 'statBubble' : 'defeatBubble');
+        playerStats.addEventListener('click',()=>{ viewProfile(summonerName)});
+
         team.append(playerStats);
         i ++;
 
@@ -72,7 +74,11 @@ function get_max_damage(players) {
             dmgDone = player['totalDamageDealtToChampions'];
         } 
     })
-
-
     return dmgDone;
+}
+
+function viewProfile(username) {
+    const id = document.querySelector('#matchdata').dataset.id;
+
+    window.location = `/profile/${id.slice(0,4).toLowerCase()}/${username}`;
 }
