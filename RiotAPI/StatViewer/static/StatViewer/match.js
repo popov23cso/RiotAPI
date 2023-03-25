@@ -44,11 +44,13 @@ function draw_match(matchdata) {
         const team = document.querySelector(`#team${i < 5 ? 1 : 2}`);
         const playerStats = document.createElement('h5');
         const dmgDone = document.createElement('div');
+        const {summonerName, championName, champLevel, kills, deaths, assists, totalMinionsKilled, neutralMinionsKilled, totalDamageDealtToChampions} = player;
+        let dmgShare = (parseFloat(totalDamageDealtToChampions) * 100) / parseFloat(max_dmg);
         dmgDone.innerHTML = `<div class="progress">
-                                <div class="progress-bar bg-danger" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: ${dmgShare}%">
+                                ${parseFloat(totalDamageDealtToChampions)}
                                 </div>
                             </div>`;
-        const {summonerName, championName, champLevel, kills, deaths, assists, totalMinionsKilled, neutralMinionsKilled} = player;
         playerStats.innerHTML = `${summonerName} - ${championName}(lvl${champLevel})<br>
                                  KDA: ${kills}/${deaths}/${assists} CS: ${totalMinionsKilled + neutralMinionsKilled}<br>`;
         playerStats.append(dmgDone);
@@ -65,8 +67,12 @@ function draw_match(matchdata) {
 
 function get_max_damage(players) {
     let dmgDone = 0;
-    //TODO get max damage done by a player
+    Array.from(players).forEach(player => {
+        if (player['totalDamageDealtToChampions'] > dmgDone) {
+            dmgDone = player['totalDamageDealtToChampions'];
+        } 
+    })
 
 
-
+    return dmgDone;
 }
