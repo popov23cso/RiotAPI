@@ -35,16 +35,14 @@ function load_match(match_id, match_region) {
 
 function draw_match(matchdata) {
     
-    const matchHeadings = document.querySelector('#matchHeadings');
-    const mode = modes[matchdata['info']['queueId']] == undefined ? '' : modes[matchdata['info']['queueId']];
-    matchHeadings.innerHTML = `Game type: ${mode} ${matchdata['info']['gameMode']}`;
     let i = 0;
     const max_dmg = get_max_damage(matchdata['info']['participants']);
+    show_general_matchdata(matchdata);
     Array.from(matchdata['info']['participants']).forEach(player => {
         const team = document.querySelector(`#team${i < 5 ? 1 : 2}`);
         const playerStats = document.createElement('h5');
         const dmgDone = document.createElement('div');
-        const {summonerName, championName, champLevel, kills, deaths, assists, totalMinionsKilled, neutralMinionsKilled, totalDamageDealtToChampions} = player;
+        const {summonerName, championName, champLevel, kills, deaths, assists, totalMinionsKilled, neutralMinionsKilled, totalDamageDealtToChampions, visionScore} = player;
         let dmgShare = (parseFloat(totalDamageDealtToChampions) * 100) / parseFloat(max_dmg);
         dmgDone.innerHTML = `<div class="progress">
                                 <div class="progress-bar bg-danger" role="progressbar" style="width: ${dmgShare}%">
@@ -52,7 +50,7 @@ function draw_match(matchdata) {
                                 </div>
                             </div>`;
         playerStats.innerHTML = `${summonerName} - ${championName}(lvl${champLevel})<br>
-                                 KDA: ${kills}/${deaths}/${assists} CS: ${totalMinionsKilled + neutralMinionsKilled}<br>`;
+                                 KDA: ${kills}/${deaths}/${assists}  CS: ${totalMinionsKilled + neutralMinionsKilled}  Vision Score: ${visionScore}<br>`;
         playerStats.append(dmgDone);
         playerStats.setAttribute('id', i < 5 ? 'statBubble' : 'defeatBubble');
         playerStats.addEventListener('click',()=>{ viewProfile(summonerName)});
@@ -81,4 +79,16 @@ function viewProfile(username) {
     const id = document.querySelector('#matchdata').dataset.id;
 
     window.location = `/profile/${id.slice(0,4).toLowerCase()}/${username}`;
+}
+
+function show_general_matchdata(matchdata) {
+    const matchHeadings = document.querySelector('#matchHeadings');
+    const mode = modes[matchdata['info']['queueId']] == undefined ? '' : modes[matchdata['info']['queueId']];
+    const player = matchdata['info']['participants'][0];
+
+
+    matchHeadings.innerHTML = `Game type: ${mode} ${matchdata['info']['gameMode']}<br>
+                               Game duration: ${parseFloat(parseFloat(player['timePlayed']) / 60).toFixed(2)} min`;
+
+
 }
